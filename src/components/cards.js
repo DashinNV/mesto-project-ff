@@ -1,5 +1,5 @@
-import { cardTemplate, cardTemplateElement } from '../index';
-
+const cardTemplate = document.querySelector('#card-template').content;
+const cardTemplateElement = cardTemplate.querySelector('.places__item');
 
 // Функция создания карточки
 function createCard({name, link}, deleteCard, handleLike, openImage) {
@@ -12,25 +12,19 @@ function createCard({name, link}, deleteCard, handleLike, openImage) {
   cardImage.alt = name; 
   deleteButton.addEventListener('click', deleteCard);
   likeButton.addEventListener('click', () => handleLike(likeButton));
-  cardImage.addEventListener('click', () => openImage(cardElement));   
+  cardImage.addEventListener('click', () => openImage(name, link));
   return cardElement;
 }
 
 // функция обработки клика на лайк
 function handleLike(button) {
-  // Проверяем, есть ли класс "card__like-button_is-active", и изменяем его
-  if (button.classList.contains('card__like-button_is-active')) {
-    button.classList.remove('card__like-button_is-active'); // Убираем активный класс
-  } else {
-    button.classList.add('card__like-button_is-active'); // Добавляем активный класс
-  }
+  button.classList.toggle('card__like-button_is-active');
 }
 
 // @todo: Функция удаления карточки
 function deleteCard (event) {
   event.target.closest('.places__item').remove()
 }
-
 
 const initialCards = [
   {
