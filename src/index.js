@@ -1,6 +1,7 @@
 import "./pages/index.css";
-import { createCard, handleLike, deleteCard, initialCards } from "./components/cards";
-import { openPopup, closePopup, handleEscKey} from "./components/modal";
+import { initialCards } from "./components/cards";
+import { createCard, handleLike, deleteCard } from "./components/card";
+import { openPopup, closePopup, closePopupByOverlay, handleEscKey} from "./components/modal";
 
 // @todo: DOM узлы
 const placesList = document.querySelector('.places__list');
@@ -98,3 +99,6 @@ closeButtons.forEach(button => {
     closePopup(popup);
   })
 })
+
+// Добавляем обработчки событий при клике на оверлей
+window.addEventListener('click', closePopupByOverlay);

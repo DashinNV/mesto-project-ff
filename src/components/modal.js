@@ -10,25 +10,25 @@ function handleEscKey(event) {
   }
 }
 
-// Функции для открытия модальных окон
+// Функция для открытия модальных окон
 function openPopup(popup) {
   popup.classList.remove('popup_is-animated'); // Убираем класс анимации
   popup.classList.add('popup_is-opened'); // Добавляем класс для открытия
   document.addEventListener('keydown', handleEscKey); // Добавляем обработчик
 }
 
-// Функции для закрытия модальных окон
+// Функция для закрытия модальных окон
 function closePopup(popup) {
   popup.classList.remove('popup_is-opened'); // Убираем класс для скрытия
   popup.classList.add('popup_is-animated'); // Добавляем класс для анимации скрытия
   document.removeEventListener('keydown', handleEscKey); // Удаляем обработчик
 }
 
-// Закрытие модальных окон при клике вне их области
-window.addEventListener('click', (event) => {
-  if (event.target.classList.contains('popup')) {
-    closePopup(event.target);
-  }
-});
+// Функция закрытия модальных окон при клике вне их области
+function closePopupByOverlay(event) {
+  if (event.target.classList.contains('popup')) { 
+   closePopup(event.target); 
+ }
+}
 
-export { openPopup, closePopup, handleEscKey };
+export { openPopup, closePopup, closePopupByOverlay, handleEscKey };
