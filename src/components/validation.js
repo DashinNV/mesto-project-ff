@@ -22,11 +22,11 @@ function hideError(inputField, validationConfig) {
 // Функция для проверки валидации полей ввода
 function checkInputValidity(inputField, validationConfig) {
   if (inputField.validity.valueMissing) {
-    showError(inputField, "Это обязательное поле", validationConfig);
+    showError(inputField, errorMessage, validationConfig);
     return false;
   }
   if (inputField.validity.patternMismatch) {
-    inputField.setCustomValidity(input.dataset.error);
+    inputField.setCustomValidity(inputField.dataset.error);
   } else { 
     inputField.setCustomValidity("");
   }

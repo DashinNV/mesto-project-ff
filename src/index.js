@@ -70,10 +70,10 @@ function handleAvatarFormSubmit(evt) {
     .then((profileData) => {
       profileAvatarEditButton.style.backgroundImage = `url(${profileData.avatar})`;
       closePopup(popupAvatar);
+      clearValidation(cardForm, validationConfig);
     })
     .catch((error) => console.error("Ошибка при обновлении аватара профиля:", error))
     .finally(() => (popupAvatarButton.textContent = originalButtonText));
-  clearValidation(avatarForm, validationConfig);
 }
 
 // Функция изменения имени и биографии в профиле
@@ -86,10 +86,10 @@ function handleProfileFormSubmit(evt) {
       profileTitle.textContent = profileData.name;
       profileDescription.textContent = profileData.about;
       closePopup(popupEditProfile);
+      clearValidation(cardForm, validationConfig);
     })
     .catch((error) => console.error("Ошибка обновления данных пользователя:", error))
     .finally(() => (popupEditProfileButton.textContent = originalButtonText));
-  clearValidation(profileForm, validationConfig);
 }
 
 // Функция добавления карточки на страницу
@@ -103,10 +103,10 @@ function handleNewCardFormSubmit(evt) {
       placesList.prepend(newCard);
       closePopup(popupNewCard);
       cardForm.reset();
+      clearValidation(cardForm, validationConfig);
     })
     .catch((error) => console.error("Ошибка при добавлении карточки:", error))
     .finally(() => (popupNewCardButton.textContent = originalButtonText));
-  clearValidation(cardForm, validationConfig);
 }
 
 // Функция удаления своей карточки
@@ -134,6 +134,7 @@ function openEditAvatarPopup() {
 }
 
 function openEditProfilePopup() {
+  clearValidation(profileForm, validationConfig);
   profileNameInput.value = profileTitle.textContent;
   profileAboutInput.value = profileDescription.textContent;
   openPopup(popupEditProfile);

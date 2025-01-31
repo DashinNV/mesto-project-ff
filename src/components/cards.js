@@ -23,7 +23,7 @@ function createCard(cardData, profileId, handleLike, deleteCard, openImage) {
   else cardLikeButton.classList.remove("card__like-button_is-active");
 
   deleteButton.addEventListener("click", () => deleteCard(card, cardData));
-  cardLikeButton.addEventListener("click", () => handleLike(card, cardData));
+  cardLikeButton.addEventListener("click", () => handleLike(cardLikeButton, cardLikeCounter, cardData));
   cardImage.addEventListener("click", () => openImage(card));
   
   return card;
@@ -36,10 +36,7 @@ function updateLikeState(cardLikeButton, cardLikeCounter, likes) {
 }
 
 // Функция обработки изменения лайка
-function handleLikeChange(card, cardData) {
-  const cardLikeButton = card.querySelector(".card__like-button");
-  const cardLikeCounter = card.querySelector(".card__like-counter");
-
+function handleLikeChange(cardLikeButton, cardLikeCounter, cardData) {
   const action = cardLikeButton.classList.contains("card__like-button_is-active")
     ? dislikeCard
     : likeCard;
