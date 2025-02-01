@@ -2,7 +2,7 @@
 function getErrorElement(inputField, validationConfig) {
   return inputField
     .closest(validationConfig.formSelector)
-    .querySelector(`.popup__input_type_error-${inputField.name}`);
+    .querySelector(`.${validationConfig.inputErrorClass}-${inputField.name}`);
 }
 
 // Функция для отображения сообщения об ошибке валидации
@@ -21,15 +21,20 @@ function hideError(inputField, validationConfig) {
 
 // Функция для проверки валидации полей ввода
 function checkInputValidity(inputField, validationConfig) {
-  if (inputField.validity.valueMissing) {
-    showError(inputField, errorMessage, validationConfig);
+  // обрабатываем случай когда отключены стандартные браузерные сообщения
+  // об ошибке для формы и в случае успеха выводим стандартное браузерное
+  // сообщение для поля "Заполните это поле"
+  if (inputField.validity.valueMissing === true && inputField.validationMessage === "") {
+    showError(inputField, "Заполните это поле", validationConfig);
     return false;
   }
+  // обрабатываем несоответствие патерну
   if (inputField.validity.patternMismatch) {
     inputField.setCustomValidity(inputField.dataset.error);
   } else { 
     inputField.setCustomValidity("");
   }
+  // проверяем прошло ли поле все проверки валидации
   if (inputField.validity.valid) {
     hideError(inputField, validationConfig);
   } else {
